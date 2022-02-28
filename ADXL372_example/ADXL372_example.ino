@@ -11,9 +11,6 @@
 
 #define INACT_TIMER        1     /* Inactivity timer value in multiples of 26ms */
 
-#define ADXL_INT1_PIN     7
-#define ADXL_INT2_PIN     5
-
 
 struct adxl372_device adxl372;
 unsigned char devId_AD;
@@ -75,7 +72,8 @@ void setup() {
   delay(1000);
 
   pinMode(CS_PIN, OUTPUT);
-  pinMode(ADXL_INT1_PIN, INPUT);
+  pinMode(INT1_ACC_PIN, INPUT);
+  pinMode(INT2_ACC_PIN, INPUT);
 
   adxl372_Get_DevID_AD(&adxl372, &devId_AD);
   adxl372_Get_DevID_MST(&adxl372, &devId_MST);
@@ -97,7 +95,7 @@ void setup() {
 
 void loop() {
   
-  if (digitalRead(ADXL_INT1_PIN)) {
+  if (digitalRead(INT1_ACC_PIN)) {
     delay(500);
     adxl372_Get_Highest_Peak_Accel_data(&adxl372, &accel_data);
   
