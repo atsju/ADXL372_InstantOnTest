@@ -2,6 +2,19 @@
 #include "Communication.h"
 #include "adxl372.h"
 
+/*Acceleremoter configuration*/
+#define ACT_VALUE          30     /* Activity threshold value */
+
+#define INACT_VALUE        30     /* Inactivity threshold value */
+
+#define ACT_TIMER          1    /* Activity timer value in multiples of 3.3ms */
+
+#define INACT_TIMER        1     /* Inactivity timer value in multiples of 26ms */
+
+#define ADXL_INT1_PIN     7
+#define ADXL_INT2_PIN     5
+
+
 struct adxl372_device adxl372;
 unsigned char devId_AD;
 unsigned char devId_MST;
@@ -46,7 +59,7 @@ void Set_Impact_Detection(void)
   adxl372_Set_Inactivity_Time(&adxl372, INACT_TIMER);
   
   /* Set instant-on interrupts and activity interrupts */
-   adxl372_Set_Interrupts(&adxl372);
+  adxl372_Set_Interrupts(&adxl372);
   
   /* Set filter settle time */
   adxl372_Set_Filter_Settle(&adxl372, FILTER_SETTLE_16);

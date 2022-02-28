@@ -142,18 +142,6 @@ extern "C" {
 
 #define ADXL_SPI_RNW    1
 
-/*Acceleremoter configuration*/
-#define ACT_VALUE          30     /* Activity threshold value */
-
-#define INACT_VALUE        30     /* Inactivity threshold value */
-
-#define ACT_TIMER          1    /* Activity timer value in multiples of 3.3ms */
-
-#define INACT_TIMER        1     /* Inactivity timer value in multiples of 26ms */
-
-#define ADXL_INT1_PIN     7
-#define ADXL_INT2_PIN     5
-
 typedef unsigned char adxl_spi_handle;
 
 typedef enum {
