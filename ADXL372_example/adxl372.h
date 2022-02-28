@@ -142,6 +142,16 @@ extern "C" {
 
 #define ADXL_SPI_RNW    1
 
+/* ADXL372_INTx_MAP */
+#define INTx_MAP_DATA_RDY   (1<<0)
+#define INTx_MAP_FIFO_RDY   (1<<1)
+#define INTx_MAP_FIFO_FULL  (1<<2)
+#define INTx_MAP_FIFO_OVR   (1<<3)
+#define INTx_MAP_INACT      (1<<4)
+#define INTx_MAP_ACT        (1<<5)
+#define INTx_MAP_AWAKE      (1<<6)
+#define INTx_MAP_LOW        (1<<7)
+
 typedef unsigned char adxl_spi_handle;
 
 typedef enum {
@@ -273,7 +283,8 @@ int adxl372_Configure_FIFO(struct adxl372_device *dev, unsigned short fifo_sampl
                            ADXL372_FIFO_MODE fifo_mode,
                            ADXL372_FIFO_FORMAT fifo_format);
 int adxl372_Get_FIFO_data(struct adxl372_device *dev, short *samples);
-int adxl372_Set_Interrupts(struct adxl372_device *dev);
+int adxl372_Set_Interrupts1(struct adxl372_device *dev, unsigned char intMap);
+int adxl372_Set_Interrupts2(struct adxl372_device *dev, unsigned char intMap);
 
 
 #ifdef __cplusplus

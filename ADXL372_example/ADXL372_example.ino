@@ -56,7 +56,7 @@ void Set_Impact_Detection(void)
   adxl372_Set_Inactivity_Time(&adxl372, INACT_TIMER);
   
   /* Set instant-on interrupts and activity interrupts */
-  adxl372_Set_Interrupts(&adxl372);
+  adxl372_Set_Interrupts1(&adxl372, INTx_MAP_AWAKE);
   
   /* Set filter settle time */
   adxl372_Set_Filter_Settle(&adxl372, FILTER_SETTLE_16);

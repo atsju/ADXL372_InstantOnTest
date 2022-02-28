@@ -349,13 +349,20 @@ int adxl372_Get_FIFO_data(struct adxl372_device *dev, short *samples)
     return err;
 }
 
-int adxl372_Set_Interrupts(struct adxl372_device *dev)
+int adxl372_Set_Interrupts1(struct adxl372_device *dev, unsigned char intMap)
 {
   int err;
   
-  err = adxl_write_reg(dev->spi, ADI_ADXL372_INT1_MAP, (0x1 << 6));
-  if (err < 0)
-      return err;
+  err = adxl_write_reg(dev->spi, ADI_ADXL372_INT1_MAP, intMap);
+
+  return err;
+}
+
+int adxl372_Set_Interrupts2(struct adxl372_device *dev, unsigned char intMap)
+{
+  int err;
+  
+  err = adxl_write_reg(dev->spi, ADI_ADXL372_INT2_MAP, intMap);
 
   return err;
 }
