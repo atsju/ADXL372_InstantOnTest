@@ -268,7 +268,10 @@ int adxl372_Set_Inactivity_Time(struct adxl372_device *dev,
                                 unsigned short time);
 int adxl372_Set_Filter_Settle(struct adxl372_device *dev,
                               ADXL372_Filter_Settle mode);
-int adxl372_Get_DevID(struct adxl372_device *dev, unsigned char *DevID);
+int adxl372_Get_DevID_AD(struct adxl372_device *dev, unsigned char *DevID_AD);
+int adxl372_Get_DevID_MST(struct adxl372_device *dev, unsigned char *DevID_MST);
+int adxl372_Get_DevID_Product(struct adxl372_device *dev, unsigned char *DevID_Product);
+int adxl372_Get_RevID(struct adxl372_device *dev, unsigned char *RevID);
 int adxl372_Get_Status_Register(struct adxl372_device *dev,
                                 unsigned char *adxl_status);
 int adxl372_Get_ActivityStatus_Register(struct adxl372_device *dev,
@@ -290,4 +293,3 @@ int adxl372_Set_Interrupts(struct adxl372_device *dev);
 #endif
 
 #endif /* ADXL372_H_ */
-

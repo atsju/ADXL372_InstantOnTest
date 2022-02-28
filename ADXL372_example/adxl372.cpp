@@ -208,9 +208,24 @@ int adxl372_Set_Filter_Settle(struct adxl372_device *dev,
                            PWRCTRL_FILTER_SETTLE_MASK, PWRCTRL_FILTER_SETTLE_POS, mode);
 }
 
-int adxl372_Get_DevID(struct adxl372_device *dev, unsigned char *DevID)
+int adxl372_Get_DevID_AD(struct adxl372_device *dev, unsigned char *DevID_AD)
 {
-    return adxl_read_reg_multiple(dev->spi, ADI_ADXL372_ADI_DEVID, 1, DevID);
+    return adxl_read_reg_multiple(dev->spi, ADI_ADXL372_ADI_DEVID, 1, DevID_AD);
+}
+
+int adxl372_Get_DevID_MST(struct adxl372_device *dev, unsigned char *DevID_MST)
+{
+    return adxl_read_reg_multiple(dev->spi, ADI_ADXL372_MST_DEVID, 1, DevID_MST);
+}
+
+int adxl372_Get_DevID_Product(struct adxl372_device *dev, unsigned char *DevID_Product)
+{
+    return adxl_read_reg_multiple(dev->spi, ADI_ADXL372_DEVID, 1, DevID_Product);
+}
+
+int adxl372_Get_RevID(struct adxl372_device *dev, unsigned char *RevID)
+{
+    return adxl_read_reg_multiple(dev->spi, ADI_ADXL372_REVID, 1, RevID);
 }
 
 int adxl372_Get_Status_Register(struct adxl372_device *dev,
@@ -344,4 +359,3 @@ int adxl372_Set_Interrupts(struct adxl372_device *dev)
 
   return err;
 }
-

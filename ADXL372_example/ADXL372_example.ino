@@ -3,7 +3,10 @@
 #include "adxl372.h"
 
 struct adxl372_device adxl372;
-unsigned char devId;
+unsigned char devId_AD;
+unsigned char devId_MST;
+unsigned char devID_Product;
+unsigned char revID;
 AccelTriplet_t accel_data;
 
 typedef struct {
@@ -61,17 +64,26 @@ void setup() {
   pinMode(CS_PIN, OUTPUT);
   pinMode(ADXL_INT1_PIN, INPUT);
 
-  adxl372_Get_DevID(&adxl372, &devId);
+  adxl372_Get_DevID_AD(&adxl372, &devId_AD);
+  adxl372_Get_DevID_MST(&adxl372, &devId_MST);
+  adxl372_Get_DevID_Product(&adxl372, &devID_Product);
+  adxl372_Get_RevID(&adxl372, &revID);
 
   Serial.print("Device id: ");
-  Serial.println(devId, HEX);
+  Serial.println(devId_AD, HEX);
+  Serial.print("Mems id: ");
+  Serial.println(devId_MST, HEX);
+  Serial.print("Part id: ");
+  Serial.println(devID_Product, HEX);
+  Serial.print("Revision: ");
+  Serial.println(revID, HEX);
 
   adxl372_Set_Op_mode(&adxl372, FULL_BW_MEASUREMENT);
   Set_Impact_Detection();
 }
 
 void loop() {
-
+  
   if (digitalRead(ADXL_INT1_PIN)) {
     delay(500);
     adxl372_Get_Highest_Peak_Accel_data(&adxl372, &accel_data);
