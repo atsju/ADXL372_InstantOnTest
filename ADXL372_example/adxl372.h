@@ -273,7 +273,9 @@ int adxl372_Get_RevID(struct adxl372_device *dev, unsigned char *RevID);
 int adxl372_Get_Status_Register(struct adxl372_device *dev,
                                 unsigned char *adxl_status);
 int adxl372_Get_ActivityStatus_Register(struct adxl372_device *dev,
-                                        unsigned char *adxl_status);
+                                unsigned char *adxl_status);
+int adxl372_Get_Fifo_Entries(struct adxl372_device *dev,
+                                unsigned short *nb_entries);
 int adxl372_Get_Highest_Peak_Accel_data(struct adxl372_device *dev,
                                         AccelTriplet_t *max_peak);
 int adxl372_Get_Accel_data(struct adxl372_device *dev,
@@ -282,7 +284,7 @@ int adxl372_Reset(struct adxl372_device *dev);
 int adxl372_Configure_FIFO(struct adxl372_device *dev, unsigned short fifo_samples,
                            ADXL372_FIFO_MODE fifo_mode,
                            ADXL372_FIFO_FORMAT fifo_format);
-int adxl372_Get_FIFO_data(struct adxl372_device *dev, short *samples);
+int adxl372_Get_FIFO_data(struct adxl372_device *dev, short *samples, unsigned short nb_samples);
 int adxl372_Set_Interrupts1(struct adxl372_device *dev, unsigned char intMap);
 int adxl372_Set_Interrupts2(struct adxl372_device *dev, unsigned char intMap);
 

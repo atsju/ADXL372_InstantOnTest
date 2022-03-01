@@ -243,6 +243,16 @@ int adxl372_Get_ActivityStatus_Register(struct adxl372_device *dev,
 #define SWAP16(x) ((x) = (((x) & 0x00FF) << 8) | (((x) & 0xFF00) >> 8))
 #define SHIFT4(x) ((x) = (x) >> 4)
 
+int adxl372_Get_Fifo_Entries(struct adxl372_device *dev,
+                                unsigned short *nb_entries)
+{
+    int err = adxl_read_reg_multiple(dev->spi, ADI_ADXL372_FIFO_ENTRIES_2, 2, (unsigned char *)nb_entries);
+#ifdef L_ENDIAN
+    SWAP16(*nb_entries);
+#endif
+    return err;
+}
+
 int adxl372_Get_Highest_Peak_Accel_data(struct adxl372_device *dev,
                                         AccelTriplet_t *max_peak)
 {
@@ -332,17 +342,17 @@ int adxl372_Configure_FIFO(struct adxl372_device *dev,
     return err;
 }
 
-int adxl372_Get_FIFO_data(struct adxl372_device *dev, short *samples)
+int adxl372_Get_FIFO_data(struct adxl372_device *dev, short *samples, unsigned short nb_samples)
 {
     int err, i;
     if(dev->fifo_config.mode == BYPASSED)
         return -1;
 
     err = adxl_read_reg_multiple(dev->spi, ADI_ADXL372_FIFO_DATA,
-                                 dev->fifo_config.samples * 2, (unsigned char *) samples);
+                                 nb_samples * 2, (unsigned char *) samples);
 
 #ifdef L_ENDIAN
-    for (i = 0; i < dev->fifo_config.samples; i++)
+    for (i = 0; i < nb_samples; i++)
         SWAP16(samples[i]);
 #endif
 
